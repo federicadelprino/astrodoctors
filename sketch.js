@@ -1,74 +1,128 @@
 var myData;
-var astronauts = []; //list of balls-astronauts
+var space;
+var img;
+var astronauts = [];
+var usa;
+var russia;
+var italy;
+var a = true;
+
 
 function preload() {
 	myData = loadJSON('assets/peopleinspace.json');
+	space = loadImage("assets/doctorspace.jpg");
+	img = loadImage("assets/tardis.png");
+	
+	usa = loadImage("assets/usa.jpg");
+	russia = loadImage("assets/russia.jpg");
+	italy = loadImage("assets/italy.jpg");
 }
 
-function setup() {
 
-	createCanvas(500, 500);
-	
-	for (var i = 0; i < myData.people.length; i++) { 
-	  
-	  var astroData = myData.people[i];
-	  
-		var newAstronaut = new Astronaut(astroData.name, astroData.launchdate); 
-		//nome della mia varibaile + nome nell'oggetto JSON
+function setup() {
+   createCanvas(500,500);
+
+  	for (var i = 0; i < myData.people.length; i++) {
+	   var astroData = myData.people[i];
+		var newAstronaut = new Astronaut(astroData.name, astroData.launchdate, astroData.country);
 		astronauts.push(newAstronaut);
 	}
 }
 
+
+// DRAW
 function draw() {
-	background(240);
+   
+   background(space);
+   
+  	for (var i = 0; i < astronauts.length; i++) {
+	
+		var astronaut = astronauts[i];
+		astronaut.move();
+		astronaut.display();
 
-	for (var i = 0; i < astronauts.length; i++) {
-		var astro = astronauts[i];
-		astro.move();
-		astro.display();
+  	}
+  	
+  	textSize(20);
+  text("Click to know more about these Doctors", 250, 50);
+
 	}
+	
 
+function mousePressed() {
+
+  
 }
 
-function Astronaut(name, date) { //write in in capital letters
 
-  this.name = name;
-  this.launchDate = date;
-  
-  var daysInSpace = (Date.now() - Date.parse(this.launchDate))/1000/60/60/24; //ms spent in space transformed in days
-  //"date.parse" standard funciton in javascript - it takes a string a transforms in a date
-  
- this.radius = daysInSpace; // "this" for variables related specifically to the object
+function Astronaut(name, date, country) {
+   
+	this.name = name;
+	this.launchdate = date;
+	this.country = country;
 
-	this.x = random(this.radius, width - this.radius);
-	this.y = random(this.radius, height - this.radius);
+
+var daysInSpace = (Date.now() - Date.parse(this.launchdate))/ (1000*60*60*24)/2;
+
+   this.radius = daysInSpace;
+   
+	this.x = random(this.radius+1, width+1 - this.radius);
+	this.y = random(this.radius+1, height+1 - this.radius);
 
 	this.incrementX = 1;
 	this.incrementY = 1;
-
+	
+	
 	this.display = function() {
 
-fill(170,30,83);
-		ellipse(this.x, this.y, this.radius * 2);
-		textAlign(CENTER);
-		text(this.name, this.x, this.y+ this.radius + 15); // give space to the text
+image(img, this.x-50, this.y-50);
+	
+textAlign(CENTER);
+fill('white');
+		
+      
+     if(mouseIsPressed) {
+       noStroke();
+         fill('white');
+         textSize(13);
+         text(this.name, this.x, this.y+105);
+         stroke(7, 9, 119);
+         strokeWeight(2);
+         fill(136, 167, 216);
+         text(parseInt(this.radius)+" days in space", this.x, this.y+90);
+         fill(136, 160, 200);
+         if(this.country == "usa") {
+         image(usa, this.x-25, this.y-50);
+          }
+          
+          else if(this.country =="russia") {
+            image(russia, this.x-25, this.y-50);
+         
+          }
+          
+          else if(this.country == "italy") {
+          image(italy, this.x-25, this.y-50);
+          }
+		   
+		   
+		} 
+		
+		
 	}
 
 	this.move = function() {
-
+	   
+      
 		this.x += this.incrementX;
 		this.y += this.incrementY;
 
 		if (this.x > width - this.radius || this.x < this.radius) {
-			this.incrementX *= -1
-			print(this.x);
-			print(this.radius);
+			this.incrementX *= -1;
 		}
 
 		if (this.y > height - this.radius || this.y < this.radius) {
-			this.incrementY *= -1
-			print(this.y);
-			print(this.radius);
+			this.incrementY *= -1;
 		}
-	}
-}
+		
+		
+	}}
