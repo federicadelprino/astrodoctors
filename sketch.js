@@ -46,7 +46,8 @@ function draw() {
   	textSize(20);
   	textAlign(CENTER);
   text("CLICK and PRESS", 250, 25);
-  text("to know more about these Doctors and see their enemies", 250, 50);
+	textSize(15);
+  text("to know more about these Doctors and see their Enemies", 250, 50);
 	}
 	
 
