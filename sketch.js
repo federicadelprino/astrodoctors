@@ -46,6 +46,8 @@ function draw() {
   	textSize(20);
   	textAlign(CENTER);
   text("CLICK to know more about these Doctors", 250, 25);
+  noStroke();
+  text("PRESS to see the enemies", 250, 50);
 	}
 	
 
@@ -106,7 +108,7 @@ fill('white');
 		   	
 		   	if(keyIsPressed) {
         image(enemies);
-        text("PRESS to see the enemies", 250, 50);
+        
 		   	}
 		
 		
