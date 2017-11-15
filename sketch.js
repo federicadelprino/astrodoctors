@@ -12,7 +12,7 @@ function preload() {
 	myData = loadJSON('assets/peopleinspace.json');
 	space = loadImage("assets/doctorspace.jpg");
 	img = loadImage("assets/tardis.png");
-	
+	enemies = loadImage("assets/enemies.png");
 	usa = loadImage("assets/usa.jpg");
 	russia = loadImage("assets/russia.jpg");
 	italy = loadImage("assets/italy.jpg");
@@ -44,13 +44,12 @@ function draw() {
   	}
   	
   	textSize(20);
-  text("Click to know more about these Doctors", 250, 50);
-
+  	textAlign(CENTER);
+  text("CLICK to know more about these Doctors", 250, 25);
 	}
 	
 
 function mousePressed() {
-
   
 }
 
@@ -103,9 +102,13 @@ fill('white');
           else if(this.country == "italy") {
           image(italy, this.x-25, this.y-50);
           }
-		   
-		   
-		} 
+		   	} 
+		   	
+		   	if(keyIsPressed) {
+        image(enemies);
+        noStroke();
+        text("PRESS to see the enemies", 250, 50);
+		   	}
 		
 		
 	}
