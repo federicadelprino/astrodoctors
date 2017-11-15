@@ -106,7 +106,6 @@ fill('white');
 		   	
 		   	if(keyIsPressed) {
         image(enemies);
-        noStroke();
         text("PRESS to see the enemies", 250, 50);
 		   	}
 		
